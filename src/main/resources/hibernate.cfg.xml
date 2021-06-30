@@ -6,8 +6,12 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.connection.url">jdbc:mysql://&lt;host&gt;&lt;:port&gt;/&lt;database&gt;</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/projet_annuel</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <mapping class="com.Model.candidat"/>
+        <mapping class="com.Model.intervenant"/>
+        <mapping class="com.Model.entretien"/>
+        <mapping class="com.Model.parcours"/>
     </session-factory>
 </hibernate-configuration>

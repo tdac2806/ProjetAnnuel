@@ -1,5 +1,7 @@
 package com.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="intervenant")
-public class candidat {
+@Table(name="candidat")
+public class candidat implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class candidat {
 	private String can_nom;
 	
 	@Column(name="can_prenom", nullable = true, unique=false, length=150)
-	private int can_prenom;
+	private String can_prenom;
 	
 	@Column(name="can_email", nullable = true, unique=false)
 	private String can_email;
@@ -39,7 +41,7 @@ public class candidat {
 		super();
 	}
 
-	public candidat(String can_nom, int can_prenom, String can_email, int can_tel) {
+	public candidat(String can_nom, String can_prenom, String can_email, int can_tel) {
 		super();
 		this.can_nom = can_nom;
 		this.can_prenom = can_prenom;
@@ -63,11 +65,11 @@ public class candidat {
 		this.can_nom = can_nom;
 	}
 
-	public int getCan_prenom() {
+	public String getCan_prenom() {
 		return can_prenom;
 	}
 
-	public void setCan_prenom(int can_prenom) {
+	public void setCan_prenom(String can_prenom) {
 		this.can_prenom = can_prenom;
 	}
 

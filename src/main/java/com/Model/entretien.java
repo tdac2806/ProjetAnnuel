@@ -1,5 +1,6 @@
 package com.Model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="entretien")
-public class entretien {
+public class entretien  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
