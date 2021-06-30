@@ -5,7 +5,12 @@ import org.hibernate.Session;
 import com.Model.candidat;
 import com.ProjetAnnuel.HibernateUtil;
 import com.Service.candidatService;
+
+
+
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
@@ -39,25 +44,30 @@ public class App extends javax.swing.JFrame {
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Calendrier");
-        //openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            //public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //openMenuItemActionPerformed(evt);
-            //}
-        //});
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
         
         addMenuItem.setMnemonic('x');
         addMenuItem.setText("Liste de formateurs");
-        //addMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            //public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //addMenuItemActionPerformed(evt);
-           // }
-       // });
+        addMenuItem.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(addMenuItem);  
 
         menuBar.add(fileMenu);
         
         JMenuItem mntmNewMenuItem = new JMenuItem("Formulaire inscription");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		mntmNewMenuItemActionPerformed(e);
+        	}
+        });
         fileMenu.add(mntmNewMenuItem);
 
         setJMenuBar(menuBar);
@@ -75,8 +85,28 @@ public class App extends javax.swing.JFrame {
 
         pack();
     }
+    
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        Fenetreliste fl = new Fenetreliste();
+        desktopPane.add(fl);
+        fl.setVisible(true);
+    }
+    
+    private void addMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        Fenetrecalendrier fc = new Fenetrecalendrier();
+        desktopPane.add(fc);
+        fc.setVisible(true);
+    }
+    
 
-
+    private void mntmNewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    	Fenetreformulaire ff = new Fenetreformulaire();
+        desktopPane.add(ff);
+        ff.setVisible(true);
+    }
 
 
     public static void main(String args[]) {
