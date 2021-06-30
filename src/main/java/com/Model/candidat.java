@@ -16,20 +16,20 @@ public class candidat implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="can_id", nullable = false, unique =true)
-	private int can_id;
+	@Column(name="id", nullable = false, unique =true)
+	private int id;
 	
-	@Column(name="can_nom", nullable = true, unique=false, length=50)
-	private String can_nom;
+	@Column(name="nom", nullable = true, unique=false, length=50)
+	private String nom;
 	
-	@Column(name="can_prenom", nullable = true, unique=false, length=150)
-	private String can_prenom;
+	@Column(name="prenom", nullable = true, unique=false, length=150)
+	private String prenom;
 	
-	@Column(name="can_email", nullable = true, unique=false)
-	private String can_email;
+	@Column(name="email", nullable = true, unique=false)
+	private String email;
 	
-	@Column(name="can_tel", nullable = true, unique=false)
-	private int can_tel;
+	@Column(name="tel", nullable = true, unique=false)
+	private int tel;
 	
 	@ManyToOne
 	private parcours parcours;
@@ -41,52 +41,52 @@ public class candidat implements Serializable{
 		super();
 	}
 
-	public candidat(String can_nom, String can_prenom, String can_email, int can_tel) {
+	public candidat(String nom, String prenom, String email, int tel) {
 		super();
-		this.can_nom = can_nom;
-		this.can_prenom = can_prenom;
-		this.can_email = can_email;
-		this.can_tel = can_tel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.tel = tel;
 	}
 
-	public int getCan_id() {
-		return can_id;
+	public int getid() {
+		return id;
 	}
 
-	public void setCan_id(int can_id) {
-		this.can_id = can_id;
+	public void setid(int id) {
+		this.id = id;
 	}
 
-	public String getCan_nom() {
-		return can_nom;
+	public String getnom() {
+		return nom;
 	}
 
-	public void setCan_nom(String can_nom) {
-		this.can_nom = can_nom;
+	public void setnom(String nom) {
+		this.nom = nom;
 	}
 
-	public String getCan_prenom() {
-		return can_prenom;
+	public String getprenom() {
+		return prenom;
 	}
 
-	public void setCan_prenom(String can_prenom) {
-		this.can_prenom = can_prenom;
+	public void setprenom(String prenom) {
+		this.prenom = prenom;
 	}
 
-	public String getCan_email() {
-		return can_email;
+	public String getemail() {
+		return email;
 	}
 
-	public void setCan_email(String can_email) {
-		this.can_email = can_email;
+	public void setemail(String email) {
+		this.email = email;
 	}
 
-	public int getCan_tel() {
-		return can_tel;
+	public int gettel() {
+		return tel;
 	}
 
-	public void setCan_tel(int can_tel) {
-		this.can_tel = can_tel;
+	public void settel(int tel) {
+		this.tel = tel;
 	}
 	
 }

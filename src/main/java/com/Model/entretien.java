@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,20 +20,20 @@ public class entretien  implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ent_id", nullable = false, unique =true)
-	private int ent_id;
+	@Column(name="id", nullable = false, unique =true)
+	private int id;
 	
-	@Column(name="ent_date", nullable = true, unique=false, length=50)
-	private Date ent_date;
+	@Column(name="date", nullable = true, unique=false, length=50)
+	private Date date;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ent_id")
-	private Set<intervenant> intervenants;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="PersonnelId")
+	private personnel personnel;
 
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ent_id")
-	private Set<candidat> candidats;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="CandidatId")
+	private candidat candidat;
 
 
 	public entretien() {
@@ -41,49 +41,51 @@ public class entretien  implements Serializable{
 	}
 
 
-	public entretien(Date ent_date) {
+	public entretien(Date date) {
 		super();
-		this.ent_date = ent_date;
+		this.date = date;
 	}
 
 
-	public int getEnt_id() {
-		return ent_id;
+	public int getid() {
+		return id;
 	}
 
 
-	public void setEnt_id(int ent_id) {
-		this.ent_id = ent_id;
+	public void setid(int id) {
+		this.id = id;
 	}
 
 
-	public Date getEnt_date() {
-		return ent_date;
+	public Date getdate() {
+		return date;
 	}
 
 
-	public void setEnt_date(Date ent_date) {
-		this.ent_date = ent_date;
+	public void setdate(Date date) {
+		this.date = date;
 	}
 
 
-	public Set<intervenant> getIntervenants() {
-		return intervenants;
+	public personnel getPersonnel() {
+		return personnel;
 	}
 
 
-	public void setIntervenants(Set<intervenant> intervenants) {
-		this.intervenants = intervenants;
+	public void setPersonnel(personnel personnel) {
+		this.personnel = personnel;
 	}
 
 
-	public Set<candidat> getCandidats() {
-		return candidats;
+	public candidat getCandidat() {
+		return candidat;
 	}
 
 
-	public void setCandidats(Set<candidat> candidats) {
-		this.candidats = candidats;
+	public void setCandidat(candidat candidat) {
+		this.candidat = candidat;
 	}
+	
+
 	
 }
