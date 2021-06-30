@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import com.Model.candidat;
 import com.ProjetAnnuel.HibernateUtil;
 import com.Service.candidatService;
+import javax.swing.JMenuItem;
 
 
 
@@ -55,6 +56,9 @@ public class App extends javax.swing.JFrame {
         fileMenu.add(addMenuItem);  
 
         menuBar.add(fileMenu);
+        
+        JMenuItem mntmNewMenuItem = new JMenuItem("Formulaire inscription");
+        fileMenu.add(mntmNewMenuItem);
 
         setJMenuBar(menuBar);
 
@@ -115,6 +119,5 @@ private javax.swing.JMenu fileMenu;
 private javax.swing.JMenuBar menuBar;
 private javax.swing.JMenuItem openMenuItem;
 private javax.swing.JMenuItem addMenuItem;
-
 }
 
