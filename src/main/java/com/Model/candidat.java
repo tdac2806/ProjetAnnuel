@@ -1,13 +1,17 @@
 package com.Model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,11 +35,13 @@ public class candidat implements Serializable{
 	@Column(name="tel", nullable = true, unique=false)
 	private int tel;
 	
-	@ManyToOne
-	private parcours parcours;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="ParcoursId")
+	private Set<parcours> parcours;
 	
-	@ManyToOne
-	private entretien entretien;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id")
+	private Set<entretien> entretiens;
 
 	public candidat() {
 		super();
@@ -88,5 +94,23 @@ public class candidat implements Serializable{
 	public void settel(int tel) {
 		this.tel = tel;
 	}
+
+	public Set<parcours> getParcours() {
+		return parcours;
+	}
+
+	public void setParcours(Set<parcours> parcours) {
+		this.parcours = parcours;
+	}
+
+	public Set<entretien> getEntretiens() {
+		return entretiens;
+	}
+
+	public void setEntretiens(Set<entretien> entretiens) {
+		this.entretiens = entretiens;
+	}
+	
+	
 	
 }
