@@ -54,7 +54,7 @@ public class candidat implements Serializable{
 	public candidat() {
 		super();
 	}
-
+	
 	public candidat(String nom, String prenom, String email, String tel) {
 		super();
 		this.nom = nom;

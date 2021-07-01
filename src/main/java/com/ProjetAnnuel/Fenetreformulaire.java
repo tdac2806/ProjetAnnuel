@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,9 +15,12 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import com.Model.candidat;
+import com.Model.parcours;
 import com.Service.candidatService;
+import com.Service.parcoursService;
 
 import org.hibernate.Session;
+import javax.swing.JFormattedTextField;
 
 public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 public Fenetreformulaire() {
@@ -26,7 +30,8 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 
 	 private void initComponents() {
 
-
+		  
+		  parcoursService ps = new parcoursService();
 	      jPanel2 = new javax.swing.JPanel();
 		  
 		  setSize(403,288);
@@ -93,9 +98,16 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      lblNewLabel_5.setBounds(10, 123, 246, 13);
 	      panel_1.add(lblNewLabel_5);
 	      
-	      JComboBox comboBox = new JComboBox();
 	      comboBox.setBounds(66, 146, 244, 21);
 	      panel_1.add(comboBox);
+	      
+	      List<parcours> listeparc = ps.findAll(session);
+			
+			for(parcours parc : listeparc) 
+			{
+				comboBox.addItem(parc.getnom());
+			}
+	      
 	      
 	      JButton btnNewButton = new JButton("Confirmer");
 	      btnNewButton.addActionListener(new ActionListener() {
@@ -123,7 +135,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	  }
 
 	 private void btajoutActionPerformed(java.awt.event.ActionEvent evt) {
-	      String Nom =textField.getText();
+	     String Nom =textField.getText();
          String prenom =textField_1.getText();
          String email =textField_2.getText();
          String telephone =textField_3.getText();
@@ -144,6 +156,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 private JTextField textField_1;
 	 private JTextField textField_2;
 	 private JTextField textField_3;
-    private JPanel panel_1  = new JPanel();
+     private JPanel panel_1  = new JPanel();
+     private JComboBox comboBox = new JComboBox();
     Session session = HibernateUtil.getSessionFactory().openSession();
 }
