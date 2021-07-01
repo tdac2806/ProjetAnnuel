@@ -36,6 +36,9 @@ public class candidat implements Serializable{
 	
 	@Column(name="tel", nullable = true, unique=false, length = 10)
 	private String tel;
+
+   @Column(name="DateDispo", nullable = true, unique=false, length = 10)
+	private String DateDispo;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ParcoursId")
@@ -55,12 +58,13 @@ public class candidat implements Serializable{
 		super();
 	}
 	
-	public candidat(String nom, String prenom, String email, String tel) {
+	public candidat(String nom, String prenom, String email, String tel,String DateDispo) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.tel = tel;
+      this.DateDispo = DateDispo;
 	}
 
 	public int getid() {
@@ -111,8 +115,11 @@ public class candidat implements Serializable{
 		this.parcours = parcours;
 	}
 
-
+	public void setParcoursId(int parcoursId) {
+		this.parcoursid = parcoursId;
+	}
 	
+   private int parcoursid;
 	
 	
 }

@@ -15,12 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import com.Model.candidat;
+import com.Model.entretien;
 import com.Model.parcours;
 import com.Service.candidatService;
+import com.Service.entretienService;
 import com.Service.parcoursService;
 
 import org.hibernate.Session;
 import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
 
 public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 public Fenetreformulaire() {
@@ -34,7 +37,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 		  parcoursService ps = new parcoursService();
 	      jPanel2 = new javax.swing.JPanel();
 		  
-		  setSize(403,288);
+		  setSize(572,288);
 	      setVisible(true);
 	      setIconifiable(true);
 
@@ -95,10 +98,10 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      
 	      JLabel lblNewLabel_5 = new JLabel("Quelle formation voulez vous choisir ? ");
 	      lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
-	      lblNewLabel_5.setBounds(10, 123, 246, 13);
+	      lblNewLabel_5.setBounds(130, 123, 246, 13);
 	      panel_1.add(lblNewLabel_5);
 	      
-	      comboBox.setBounds(66, 146, 244, 21);
+	      comboBox.setBounds(186, 146, 244, 21);
 	      panel_1.add(comboBox);
 	      
 	      List<parcours> listeparc = ps.findAll(session);
@@ -115,7 +118,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      		btajoutActionPerformed(e);
 	      	}
 	      });
-	      btnNewButton.setBounds(77, 194, 85, 21);
+	      btnNewButton.setBounds(197, 194, 85, 21);
 	      panel_1.add(btnNewButton);
 	      
 	      JButton btnNewButton_1 = new JButton("Quitter");
@@ -124,8 +127,18 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
                btquitterActionPerformed(e);
 	      	}
 	      });
-	      btnNewButton_1.setBounds(197, 194, 85, 21);
+	      btnNewButton_1.setBounds(317, 194, 85, 21);
 	      panel_1.add(btnNewButton_1);
+	      
+	      JLabel lblNewLabel_6 = new JLabel("Vos disponibilitées (aaaa-mm-jj) :");
+	      lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 10));
+	      lblNewLabel_6.setBounds(373, 42, 178, 33);
+	      panel_1.add(lblNewLabel_6);
+	      
+	      textField_4 = new JTextField();
+	      textField_4.setColumns(10);
+	      textField_4.setBounds(373, 73, 168, 26);
+	      panel_1.add(textField_4);
 	      
 	      jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 	      jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Formulaire formation"));
@@ -139,10 +152,15 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
          String prenom =textField_1.getText();
          String email =textField_2.getText();
          String telephone =textField_3.getText();
+         int ParcoursId = 1+(comboBox.getSelectedIndex());
+         String Date =  textField_4.getText();
          this.session.beginTransaction();
          candidatService cs = new candidatService();
-         candidat c = new candidat(Nom,prenom,email,telephone);
-         cs.create(c, this.session);
+         candidat c = new candidat(Nom,prenom,email,telephone,Date);
+        
+         int id = cs.create(c, this.session);
+         c.setParcoursId(ParcoursId);
+         cs.update(session, id);
          this.session.getTransaction().commit();
          this.dispose();
     }
@@ -156,7 +174,8 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 private JTextField textField_1;
 	 private JTextField textField_2;
 	 private JTextField textField_3;
-     private JPanel panel_1  = new JPanel();
-     private JComboBox comboBox = new JComboBox();
+    private JTextField textField_4;
+    private JPanel panel_1  = new JPanel();
+    private JComboBox comboBox = new JComboBox();
     Session session = HibernateUtil.getSessionFactory().openSession();
 }

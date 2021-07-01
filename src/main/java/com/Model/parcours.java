@@ -31,7 +31,7 @@ public class parcours implements Serializable {
 	private int duree;
 	
 	@Column(name="place", nullable = true, unique=false)
-	private String place;
+	private int place;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="PersonnelId")
@@ -48,7 +48,7 @@ public class parcours implements Serializable {
 	}
 
 
-	public parcours(String nom, int duree, String place) {
+	public parcours(String nom, int duree, int place) {
 		super();
 		this.nom = nom;
 		this.duree = duree;

@@ -11,11 +11,11 @@ import com.ProjetAnnuel.HibernateUtil;
 
 public class candidatService implements Serializable {
 	
-	public boolean create(candidat c,Session s) 
+	public int create(candidat c,Session s) 
 	{
-		s.save(c); 
-
-		return true;
+		Serializable test = s.save(c); 
+      
+		return Integer.parseInt(test.toString());
 	}
 	
 	public void delete(Session s,int id) 
