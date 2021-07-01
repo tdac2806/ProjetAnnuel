@@ -1,6 +1,7 @@
 package com.Model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,9 +40,11 @@ public class personnel implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="id")
 	private Set<parcours> parcours;
-	
-	@ManyToOne
-	private entretien entretien;
+
+   @ManyToMany(mappedBy = "entretien")
+   private Set<candidat> candidat = new HashSet<>();
+
+
 
 	public personnel() {
 		super();

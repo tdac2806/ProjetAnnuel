@@ -1,40 +1,38 @@
 package com.ProjetAnnuel;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import java.awt.SystemColor;
-import java.awt.Color;
 import java.awt.Font;
-import javax.swing.border.CompoundBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.DropMode;
-import javax.swing.JComboBox;
-import java.awt.FlowLayout;
-import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+import com.Model.candidat;
+import com.Service.candidatService;
+
+import org.hibernate.Session;
 
 public class Fenetreformulaire extends javax.swing.JInternalFrame {
-	
 	 public Fenetreformulaire() {
-	      initComponents();
+	   initComponents();
+      
 	 }
 	 
 	 private void initComponents() {
-		  
+
+
 	      jPanel2 = new javax.swing.JPanel();
 		  
 		  setSize(403,288);
 	      setVisible(true);
-	      setClosable(true);
 	      setIconifiable(true);
-	      setMaximizable(true);
-	      setResizable(false);
-	      
+
 	      JPanel panel = new JPanel();
 	      panel.setBackground(SystemColor.activeCaption);
 	      getContentPane().add(panel, BorderLayout.NORTH);
@@ -45,7 +43,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      lblNewLabel.setBackground(SystemColor.activeCaption);
 	      panel.add(lblNewLabel);
 	      
-	      JPanel panel_1 = new JPanel();
+	      
 	      panel_1.setBorder(new TitledBorder(null, "Informations", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 	      getContentPane().add(panel_1, BorderLayout.CENTER);
 	      panel_1.setLayout(null);
@@ -71,22 +69,22 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      panel_1.add(lblNewLabel_4);
 	      
 	      textField = new JTextField();
-	      textField.setBounds(66, 39, 96, 19);
+	      textField.setBounds(66, 39, 96, 26);
 	      panel_1.add(textField);
 	      textField.setColumns(10);
 	      
 	      textField_1 = new JTextField();
-	      textField_1.setBounds(65, 73, 96, 19);
+	      textField_1.setBounds(65, 73, 96, 26);
 	      panel_1.add(textField_1);
 	      textField_1.setColumns(10);
 	      
 	      textField_2 = new JTextField();
-	      textField_2.setBounds(247, 39, 96, 19);
+	      textField_2.setBounds(247, 39, 96, 26);
 	      panel_1.add(textField_2);
 	      textField_2.setColumns(10);
 	      
 	      textField_3 = new JTextField();
-	      textField_3.setBounds(247, 73, 96, 19);
+	      textField_3.setBounds(247, 73, 96, 26);
 	      panel_1.add(textField_3);
 	      textField_3.setColumns(10);
 	      
@@ -100,12 +98,18 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      panel_1.add(comboBox);
 	      
 	      JButton btnNewButton = new JButton("Confirmer");
+	      btnNewButton.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		btajoutActionPerformed(e);
+	      	}
+	      });
 	      btnNewButton.setBounds(77, 194, 85, 21);
 	      panel_1.add(btnNewButton);
 	      
-	      JButton btnNewButton_1 = new JButton("Annuler");
+	      JButton btnNewButton_1 = new JButton("Quitter");
 	      btnNewButton_1.addActionListener(new ActionListener() {
 	      	public void actionPerformed(ActionEvent e) {
+               btquitterActionPerformed(e);
 	      	}
 	      });
 	      btnNewButton_1.setBounds(197, 194, 85, 21);
@@ -117,9 +121,29 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	      javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 	      jPanel2.setLayout(jPanel2Layout);
 	  }
+
+	 private void btajoutActionPerformed(java.awt.event.ActionEvent evt) {
+	      String Nom =textField.getText();
+         String prenom =textField_1.getText();
+         String email =textField_2.getText();
+         String telephone =textField_3.getText();
+         this.session.beginTransaction();
+         candidatService cs = new candidatService();
+         candidat c = new candidat(Nom,prenom,email,telephone);
+         cs.create(c, this.session);
+         this.session.getTransaction().commit();
+         this.dispose();
+    }
+
+    private void btquitterActionPerformed(java.awt.event.ActionEvent evt){
+      session.getTransaction().commit();
+      this.dispose();
+    }
 	 private javax.swing.JPanel jPanel2;
 	 private JTextField textField;
 	 private JTextField textField_1;
 	 private JTextField textField_2;
 	 private JTextField textField_3;
+    private JPanel panel_1  = new JPanel();
+    Session session = HibernateUtil.getSessionFactory().openSession();
 }

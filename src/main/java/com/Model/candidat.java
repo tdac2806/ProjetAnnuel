@@ -1,6 +1,7 @@
 package com.Model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,22 +34,28 @@ public class candidat implements Serializable{
 	@Column(name="email", nullable = true, unique=false)
 	private String email;
 	
-	@Column(name="tel", nullable = true, unique=false)
-	private int tel;
+	@Column(name="tel", nullable = true, unique=false, length = 10)
+	private String tel;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ParcoursId")
 	private Set<parcours> parcours;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
-	private Set<entretien> entretiens;
+  
+   @ManyToMany(cascade = { CascadeType.ALL })
+   @JoinTable(
+       name = "entretien", 
+       joinColumns = { @JoinColumn(name = "CandidatId") }, 
+       inverseJoinColumns = { @JoinColumn(name = "PersonnelId") }
+   )
+   Set<entretien> entretien = new HashSet<>();
+
 
 	public candidat() {
 		super();
 	}
 
-	public candidat(String nom, String prenom, String email, int tel) {
+	public candidat(String nom, String prenom, String email, String tel) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -87,11 +95,11 @@ public class candidat implements Serializable{
 		this.email = email;
 	}
 
-	public int gettel() {
+	public String gettel() {
 		return tel;
 	}
 
-	public void settel(int tel) {
+	public void settel(String tel) {
 		this.tel = tel;
 	}
 
@@ -103,13 +111,7 @@ public class candidat implements Serializable{
 		this.parcours = parcours;
 	}
 
-	public Set<entretien> getEntretiens() {
-		return entretiens;
-	}
 
-	public void setEntretiens(Set<entretien> entretiens) {
-		this.entretiens = entretiens;
-	}
 	
 	
 	
