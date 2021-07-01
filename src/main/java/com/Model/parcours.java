@@ -85,12 +85,12 @@ public class parcours implements Serializable {
 		this.duree = duree;
 	}
 
-	public String getplace() {
+	public int getplace() {
 		return place;
 	}
 
 
-	public void setplace(String place) {
+	public void setplace(int place) {
 		this.place = place;
 	}
 

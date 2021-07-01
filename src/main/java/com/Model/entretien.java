@@ -26,6 +26,10 @@ public class entretien  implements Serializable{
 	@Column(name="date", nullable = true, unique=false, length=50)
 	private Date date;
 	
+	@Column(name="StatutInscruption", nullable = true, unique=false)
+	private int statut;
+	
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PersonnelId")
 	private personnel personnel;
@@ -41,9 +45,10 @@ public class entretien  implements Serializable{
 	}
 
 
-	public entretien(Date date) {
+	public entretien(Date date, int statut) {
 		super();
 		this.date = date;
+		this.statut=statut;
 	}
 
 
@@ -84,6 +89,16 @@ public class entretien  implements Serializable{
 
 	public void setCandidat(candidat candidat) {
 		this.candidat = candidat;
+	}
+
+
+	public int getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(int statut) {
+		this.statut = statut;
 	}
 	
 

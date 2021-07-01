@@ -23,7 +23,6 @@ public class App extends javax.swing.JFrame {
       desktopPane = new javax.swing.JDesktopPane();
       menuBar = new javax.swing.JMenuBar();
       fileMenu = new javax.swing.JMenu();
-      openMenuItem = new javax.swing.JMenuItem();
       addMenuItem = new javax.swing.JMenuItem();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -31,17 +30,10 @@ public class App extends javax.swing.JFrame {
       fileMenu.setMnemonic('f');
       fileMenu.setText("Menu");
 
-      openMenuItem.setMnemonic('o');
-      openMenuItem.setText("Calendrier");
-      openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            openMenuItemActionPerformed(evt);
-         }
-      });
-      fileMenu.add(openMenuItem);
+      
 
       addMenuItem.setMnemonic('x');
-      addMenuItem.setText("Liste de formateurs");
+      addMenuItem.setText("Liste Entretien");
       addMenuItem.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             addMenuItemActionPerformed(evt);
