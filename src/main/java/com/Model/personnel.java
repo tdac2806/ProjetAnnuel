@@ -28,7 +28,7 @@ public class personnel implements Serializable {
 	private String nom;
 	
 	@Column(name="prenom", nullable = true, unique=false, length=150)
-	private int prenom;
+	private String prenom;
 	
 	@Column(name="role", nullable = true, unique=false)
 	private String role;
@@ -50,7 +50,7 @@ public class personnel implements Serializable {
 		super();
 	}
 
-	public personnel(String nom, int prenom, String role, String competence) {
+	public personnel(String nom, String prenom, String role, String competence) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -74,11 +74,11 @@ public class personnel implements Serializable {
 		this.nom = nom;
 	}
 
-	public int getPrenom() {
+	public String getPrenom() {
 		return prenom;
 	}
 
-	public void setPrenom(int prenom) {
+	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 

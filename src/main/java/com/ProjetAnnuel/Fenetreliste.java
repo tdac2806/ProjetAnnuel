@@ -7,14 +7,15 @@ import javax.swing.table.DefaultTableModel;
 
 import org.hibernate.Session;
 
+import com.Model.entretien;
 import com.Model.candidat;
 import com.Model.parcours;
 import com.Service.candidatService;
-
-
+import com.Service.entretienService;
 
 import javax.swing.GroupLayout.Alignment;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -27,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.TextArea;
 
@@ -62,6 +64,11 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       champmail.setText("");
       champdispo.setText("");
   }
+  
+  void cleartab() {
+	  
+	  model.removeRow(7);
+  }
 
   private void initComponents() {
 
@@ -77,6 +84,7 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       champparcours = new javax.swing.JTextField();
       champmail = new javax.swing.JTextField();
       bt_ajout = new javax.swing.JButton();
+
       jPanel3 = new javax.swing.JPanel();
       jScrollPane1 = new javax.swing.JScrollPane();
       table_inv = new javax.swing.JTable();
@@ -174,18 +182,22 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       );
       jPanel2.setLayout(jPanel2Layout);
 
-     bt_ajout.setText("Valider");
-     
-  
+      bt_ajout.setText("Valider");
+      bt_ajout.addActionListener(new ActionListener() {
+        	
 
-     
-     JButton bt_ajout_1 = new JButton();
-     bt_ajout_1.setText("Refuser");
-
-      
-
-      
-      
+	 public void actionPerformed(ActionEvent e) {
+				
+        	session.beginTransaction();
+        	entretienService es = new entretienService();
+        	
+        	String prop =champrop.getText();
+        	String statut = "Valide";
+            entretien e1 = new entretien(prop,statut);
+            es.create(e1, session);
+            session.getTransaction().commit();
+        	}
+        });
       
 
       jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -225,7 +237,9 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       bt_ajout_2 = new JButton();
       bt_ajout_2.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
+      		
       		load();
+      		
       	}
       });
       bt_ajout_2.setText("Rafraichir");
@@ -236,31 +250,26 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       	jPanel1Layout.createParallelGroup(Alignment.LEADING)
       		.addGroup(jPanel1Layout.createSequentialGroup()
       			.addGap(28)
-      			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-      				.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-      				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-      					.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+      			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+      				.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+      				.addGroup(jPanel1Layout.createSequentialGroup()
+      					.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
       					.addPreferredGap(ComponentPlacement.RELATED)
       					.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-      						.addComponent(bt_ajout_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      						.addComponent(bt_ajout_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      						.addComponent(bt_ajout, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
+      						.addComponent(bt_ajout_2, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+      						.addComponent(bt_ajout, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))))
       			.addContainerGap())
       );
       jPanel1Layout.setVerticalGroup(
       	jPanel1Layout.createParallelGroup(Alignment.BASELINE)
       		.addGroup(jPanel1Layout.createSequentialGroup()
-      			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-      				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-      					.addContainerGap()
-      					.addComponent(bt_ajout)
-      					.addGap(18)
-      					.addComponent(bt_ajout_1)
-      					.addGap(18)
-      					.addComponent(bt_ajout_2))
+      			.addGap(29)
+      			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
       				.addGroup(jPanel1Layout.createSequentialGroup()
-      					.addGap(29)
-      					.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+      					.addComponent(bt_ajout)
+      					.addGap(26)
+      					.addComponent(bt_ajout_2))
+      				.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
       			.addPreferredGap(ComponentPlacement.RELATED)
       			.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
       );
@@ -312,7 +321,7 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
   private javax.swing.JTextField champprenom;
   private javax.swing.JTextField champparcours;
   private javax.swing.JTextField champmail;
-  private Session session = HibernateUtil.getSessionFactory().openSession();
+  Session session = HibernateUtil.getSessionFactory().openSession();
   private JLabel lblDispo;
   private JTextField champdispo;
   private JTextField champrop;

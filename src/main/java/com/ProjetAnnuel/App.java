@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import org.hibernate.Session;
+import javax.swing.JMenu;
 
 
 public class App extends javax.swing.JFrame {
@@ -28,7 +29,7 @@ public class App extends javax.swing.JFrame {
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
       fileMenu.setMnemonic('f');
-      fileMenu.setText("Menu");
+      fileMenu.setText("Formation");
 
       
 
@@ -52,6 +53,25 @@ public class App extends javax.swing.JFrame {
       fileMenu.add(mntmNewMenuItem);
 
       setJMenuBar(menuBar);
+      
+      JMenu mnNewMenu = new JMenu("Personnel");
+      menuBar.add(mnNewMenu);
+      
+      JMenuItem formateuritem = new JMenuItem("Nouveau formateur");
+      formateuritem.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		formateuritemActionPerformed(e);
+      	}
+      });
+      mnNewMenu.add(formateuritem);
+      
+      mntmNewMenuItem_1 = new JMenuItem("Affectation Formateur");
+      mntmNewMenuItem_1.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		mntmNewMenuItem1ActionPerformed(e);
+      	}
+      });
+      mnNewMenu.add(mntmNewMenuItem_1);
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
@@ -69,6 +89,13 @@ public class App extends javax.swing.JFrame {
       desktopPane.add(fl);
       fl.setVisible(true);
    }
+   
+   private void formateuritemActionPerformed(java.awt.event.ActionEvent evt) {
+
+	      Fenetreformateur ff = new Fenetreformateur();
+	      desktopPane.add(ff);
+	      ff.setVisible(true);
+	   }
 
 
 
@@ -78,6 +105,13 @@ public class App extends javax.swing.JFrame {
       desktopPane.add(ff);
       ff.setVisible(true);
    }
+   
+   private void mntmNewMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
+
+	      Fenetrelisteformation flf = new Fenetrelisteformation();
+	      desktopPane.add(flf);
+	      flf.setVisible(true);
+	   }
 
    public static void main(String args[]) {
 
@@ -110,4 +144,5 @@ public class App extends javax.swing.JFrame {
    private javax.swing.JMenuBar menuBar;
    private javax.swing.JMenuItem openMenuItem;
    private javax.swing.JMenuItem addMenuItem;
+   private JMenuItem mntmNewMenuItem_1;
 }
