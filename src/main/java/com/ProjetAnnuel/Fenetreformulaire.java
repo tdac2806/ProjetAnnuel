@@ -26,7 +26,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
 
 public class Fenetreformulaire extends javax.swing.JInternalFrame {
-	 public Fenetreformulaire() {
+	 
+	public Fenetreformulaire() {
 	   initComponents();
       
 	 }

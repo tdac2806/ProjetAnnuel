@@ -119,7 +119,30 @@ public class candidat implements Serializable{
 		this.parcoursid = parcoursId;
 	}
 	
-   private int parcoursid;
+	
+   public int getParcoursid() {
+		return parcoursid;
+	}
+
+	public void setParcoursid(int parcoursid) {
+		this.parcoursid = parcoursid;
+	}
+	
+	
+
+
+public String getDateDispo() {
+		return DateDispo;
+	}
+
+	public void setDateDispo(String dateDispo) {
+		DateDispo = dateDispo;
+	}
+
+
+
+
+private int parcoursid;
 	
 	
 }

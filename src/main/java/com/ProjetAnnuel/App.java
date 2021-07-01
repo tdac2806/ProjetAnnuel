@@ -14,7 +14,7 @@ public class App extends javax.swing.JFrame {
       initComponents();
       this.setTitle("Gestion de formations");
       this.setLocationRelativeTo(null);
-      setSize(700, 500);
+      setSize(1000, 700);
 
    }
 
@@ -63,19 +63,14 @@ public class App extends javax.swing.JFrame {
       pack();
    }
 
-   private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+   private void addMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 
       Fenetreliste fl = new Fenetreliste();
       desktopPane.add(fl);
       fl.setVisible(true);
    }
 
-   private void addMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 
-      Fenetrecalendrier fc = new Fenetrecalendrier();
-      desktopPane.add(fc);
-      fc.setVisible(true);
-   }
 
    private void mntmNewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 
