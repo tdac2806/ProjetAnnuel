@@ -38,7 +38,7 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	      jPanel2 				= new javax.swing.JPanel();
 		  
 	      
-	      // Paramétrage du bloc JPanel
+	      // ParamÃ©trage du bloc JPanel
 		  setSize(572,288);
 	      setVisible(true);
 	      setIconifiable(true);
@@ -55,7 +55,7 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	      
 	      
 	      
-	      // == Création des éléments du bloc == //
+	      // == CrÃ©ation des Ã©lÃ©ments du bloc == //
 	      JLabel lblNewLabel_1 = new JLabel("Nom :");
 	      lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
 	      lblNewLabel_1.setBounds(163, 42, 45, 13);
@@ -142,7 +142,7 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	 
 	 private void btajoutActionPerformed(java.awt.event.ActionEvent evt) {
 		 /**
-		  * Créer et ajoute un membre du personnel à la base de données
+		  * CrÃ©er et ajoute un membre du personnel Ã  la base de donnÃ©es
 		  */
 		 
 	     String nom 	= textField.getText();

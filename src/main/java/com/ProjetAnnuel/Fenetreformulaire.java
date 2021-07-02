@@ -60,7 +60,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 	  
 	  
-		// == Création des éléments du bloc == //
+		// == CrÃ©ation des Ã©lÃ©ments du bloc == //
 		JLabel lblNewLabel_1 = new JLabel("Nom :");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
 		lblNewLabel_1.setBounds(10, 42, 45, 13);
@@ -167,7 +167,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 
 	private void btajoutActionPerformed(java.awt.event.ActionEvent evt) {
 		/**
-		 * Ajoute un candidat à la base de données
+		 * Ajoute un candidat Ã  la base de donnÃ©es
 		 */
 		String Nom 			= textField.getText();
 		String prenom 		= textField_1.getText();
@@ -176,15 +176,13 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 		String Date 		= textField_4.getText();
 		int ParcoursId 		= 1 + (comboBox.getSelectedIndex());
 		
-		this.session.beginTransaction();
-		
 		candidatService cs 	= new candidatService();
 		candidat c 			= new candidat(Nom,prenom,email,telephone,Date);
 	
 		int id = cs.create(c, this.session);
 		
 		c.setParcoursId(ParcoursId);
-		cs.update(session, id);
+		cs.update(session, id, c);
 		
 		this.session.getTransaction().commit();
 		this.dispose();
