@@ -10,8 +10,10 @@ import org.hibernate.Session;
 import com.Model.entretien;
 import com.Model.candidat;
 import com.Model.parcours;
+import com.Model.personnel;
 import com.Service.candidatService;
 import com.Service.entretienService;
+import com.Service.personnelService;
 
 import javax.swing.GroupLayout.Alignment;
 
@@ -37,7 +39,6 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
 
   DefaultTableModel model;
   static int id;
-
 
   public Fenetreliste() {
       initComponents();
@@ -117,7 +118,7 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       
       lblProposition = new JLabel();
       lblProposition.setFont(new Font("Tahoma", Font.PLAIN, 10));
-      lblProposition.setText("Proposition");
+      lblProposition.setText("Proposition :");
       
 
 
@@ -150,9 +151,10 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       					.addGap(14)
       					.addComponent(champdispo, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
       				.addGroup(jPanel2Layout.createSequentialGroup()
-      					.addComponent(lblProposition, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-      					.addGap(14)
-      					.addComponent(champrop, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))))
+      					.addComponent(lblProposition, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+      					.addPreferredGap(ComponentPlacement.RELATED)
+      					.addComponent(champrop, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)))
+      			.addGap(55))
       );
       jPanel2Layout.setVerticalGroup(
       	jPanel2Layout.createParallelGroup(Alignment.LEADING)
@@ -177,23 +179,32 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
       					.addComponent(champparcours, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
       				.addGroup(jPanel2Layout.createSequentialGroup()
       					.addGap(3)
-      					.addComponent(lblProposition))
-      				.addComponent(champrop, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+      					.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+      						.addComponent(lblProposition)
+      						.addComponent(champrop, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
       );
       jPanel2.setLayout(jPanel2Layout);
 
       bt_ajout.setText("Valider");
       bt_ajout.addActionListener(new ActionListener() {
-        	
+
+
 
 	 public void actionPerformed(ActionEvent e) {
 				
         	session.beginTransaction();
         	entretienService es = new entretienService();
-        	
+         personnelService ps = new personnelService();
+         candidatService cs = new candidatService();
+
+         candidat candidat = cs.findById(session, id);
+        	personnel personnel = ps.findById(session, 1);
+           
         	String prop =champrop.getText();
         	String statut = "Valide";
             entretien e1 = new entretien(prop,statut);
+            e1.setCandidat(candidat);
+            e1.setPersonnel(personnel);
             es.create(e1, session);
             session.getTransaction().commit();
         	}
@@ -208,7 +219,7 @@ public class Fenetreliste extends javax.swing.JInternalFrame {
 
           },
           new String [] {
-              "ID", "Nom","Prénom", "Email", "Téléphone","Formation", "Statut","Disponibilité"
+              "ID", "Nom","Prenom", "Email", "Telephone","Formation", "Statut","Disponibilite"
           }
       ));
       table_inv.addMouseListener(new java.awt.event.MouseAdapter() {

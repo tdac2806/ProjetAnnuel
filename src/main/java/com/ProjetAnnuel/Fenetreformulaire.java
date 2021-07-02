@@ -29,6 +29,7 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
 	 
 	public Fenetreformulaire() {
 	   initComponents();
+      this.session.beginTransaction();
       
 	 }
 	 
@@ -155,13 +156,12 @@ public class Fenetreformulaire extends javax.swing.JInternalFrame {
          String telephone =textField_3.getText();
          int ParcoursId = 1+(comboBox.getSelectedIndex());
          String Date =  textField_4.getText();
-         this.session.beginTransaction();
          candidatService cs = new candidatService();
          candidat c = new candidat(Nom,prenom,email,telephone,Date);
         
          int id = cs.create(c, this.session);
          c.setParcoursId(ParcoursId);
-         cs.update(session, id);
+         cs.update(session, id, c);
          this.session.getTransaction().commit();
          this.dispose();
     }

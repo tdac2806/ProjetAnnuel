@@ -24,7 +24,7 @@ public class candidatServiceTest {
 		System.out.println("Test de create() en cours...");
 		session.beginTransaction();
 	  
-	    candidat c1 = new candidat("Test","Test","Test","Test","Test");
+	    candidat c1 = new candidat("Test","Test","Test","Test","20210701");
 	    Integer id = (Integer) session.save(c1);
 	     
 	    session.getTransaction().commit();
@@ -36,16 +36,15 @@ public class candidatServiceTest {
 	public void testDelete() {
 		
 		System.out.println("Test de delete() en cours ..");
-		session.beginTransaction();
-	     
-	    Integer id = 1;
-	    candidat c1 = session.find(candidat.class, id);
+     
+	    Integer id = 4;
+	    candidatService cs = new candidatService();
 	     
 	    session.beginTransaction();
-	    session.delete(c1);
+	    cs.delete(session,id);
 	    session.getTransaction().commit();
 	     
-	    candidat deletedProduct = session.find(candidat.class, id);
+	    candidat deletedProduct = cs.findById(session, id);
 	     
 	    assertNull(deletedProduct);
 		
@@ -56,17 +55,18 @@ public class candidatServiceTest {
 	public void testUpdate() {
 		System.out.println("Test de update() en cours...");
 		session.beginTransaction();
-	     
-	    Integer id = 1;
-	    candidat c1= new candidat("Albert", "test","test","test","test");
-	     
-	    session.beginTransaction();
-	    session.update(c1);
+      candidatService cs = new candidatService(); 
+	    Integer id = 9;
+	    candidat c1= new candidat("Albert", "test","test","test","20210702");
+	    c1.setParcoursid(1);
+	    
+       cs.update(session, id, c1);
+
+       candidat updatedProduct = cs.findById(session, id);
 	    session.getTransaction().commit();
-	     
-	    candidat updatedProduct = session.find(candidat.class, id);
-	     
 	    assertEquals("Albert", updatedProduct.getnom());
+
+      
 		
 	}
 
@@ -80,7 +80,7 @@ public class candidatServiceTest {
 	     
 	    candidat c1 = session.find(candidat.class, id);
 	     
-	    assertEquals("Albert", c1.getnom()); 
+	    assertEquals("TestNom", c1.getnom()); 
 		
 	}
 

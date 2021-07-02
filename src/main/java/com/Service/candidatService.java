@@ -20,17 +20,20 @@ public class candidatService implements Serializable {
 	
 	public void delete(Session s,int id) 
 	{
-		
-		candidat c = s.get(candidat.class, id);
-		
-		s.delete(c);
-
+      Query query = s.createQuery("DELETE FROM candidat WHERE id = :candidat_id");
+      query.setParameter("candidat_id", id);
+      query.executeUpdate();;
 	}
 	
-	public void update(Session s,int id) 
+	public void update(Session s,int id, candidat candidat) 
 	{
-		
 		candidat c = s.get(candidat.class, id);
+      c.setnom(candidat.getnom());
+      c.setprenom(candidat.getprenom());
+      c.setParcoursid(candidat.getParcoursid());
+      c.setemail(candidat.getemail());
+      c.settel(candidat.gettel());
+      c.setDateDispo(candidat.getDateDispo());
 		s.update(c); // UPDATE candidat SET nom = c.getNom(), prenom= c.getPrenom() where id =id;
 
 	}

@@ -30,7 +30,7 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	 
 	public Fenetreformateur() {
 	   initComponents();
-      
+      this.session.beginTransaction();
 	 }
 	 
 	 private void initComponents() {
@@ -127,8 +127,6 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
          String role =textField_2.getText();
          String comp =textField_3.getText();
 
-
-         this.session.beginTransaction();
          personnelService ps = new personnelService();
          personnel p1 = new personnel(nom,prenom,role,comp);
         

@@ -152,7 +152,7 @@ void load() {
       
       personnelService ps= new personnelService();
       List<personnel> listepers = ps.findAll(session);
-		
+      model.setRowCount(0);
 		for(personnel per : listepers) 
 		{
 			model.addRow(new Object[]{per.getId(), per.getNom(), per.getPrenom(), per.getCompetence()});

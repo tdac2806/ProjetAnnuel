@@ -26,15 +26,15 @@ public class entretien  implements Serializable{
 	@Column(name="date", nullable = true, unique=false, length=50)
 	private String date;
 	
-	@Column(name="StatutInscruption", nullable = true, unique=false)
-	private String StatutInscruption;
+	@Column(name="StatutInscription", nullable = true, unique=false)
+	private String StatutInscription;
 	
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PersonnelId")
 	private personnel personnel;
 
-	
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CandidatId")
 	private candidat candidat;
@@ -44,13 +44,10 @@ public class entretien  implements Serializable{
 		super();
 	}
 
-
-	
-
-	public entretien(String date, String statutInscruption) {
+	public entretien(String date, String StatutInscription) {
 		super();
 		this.date = date;
-		StatutInscruption = statutInscruption;
+		this.StatutInscription = StatutInscription;
 	}
 
 
@@ -96,19 +93,12 @@ public class entretien  implements Serializable{
 	}
 
 
-	public String getStatutInscruption() {
-		return StatutInscruption;
+	public String getStatutInscription() {
+		return StatutInscription;
 	}
 
 
-	public void setStatutInscruption(String statutInscruption) {
-		StatutInscruption = statutInscruption;
+	public void setStatutInscription(String StatutInscription) {
+		StatutInscription = StatutInscription;
 	}
-	
-	
-
-
-	
-
-	
 }
