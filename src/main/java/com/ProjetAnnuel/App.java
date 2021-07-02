@@ -15,7 +15,7 @@ import com.mindfusion.scheduling.ThemeType;
 import com.mindfusion.scheduling.model.Appointment;
 import com.mindfusion.scheduling.model.ItemEvent;
 
-
+//affectation des différentes formation du projet
 public class App extends javax.swing.JFrame {
 
    public App() {
