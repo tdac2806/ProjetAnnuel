@@ -30,89 +30,105 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	 
 	public Fenetreformateur() {
 	   initComponents();
-      
 	 }
 	 
 	 private void initComponents() {
-
+		  parcoursService ps 	= new parcoursService();
+	      jPanel2 				= new javax.swing.JPanel();
 		  
-		  parcoursService ps = new parcoursService();
-	      jPanel2 = new javax.swing.JPanel();
-		  
+	      
+	      // Paramétrage du bloc JPanel
 		  setSize(572,288);
 	      setVisible(true);
 	      setIconifiable(true);
 
 	      JPanel panel = new JPanel();
 	      panel.setBackground(SystemColor.activeCaption);
-	      getContentPane().add(panel, BorderLayout.NORTH);
 	      panel.setLayout(new GridLayout(0, 1, 0, 0));
+	      getContentPane().add(panel, BorderLayout.NORTH);
 	      
 	      
 	      panel_1.setBorder(new TitledBorder(null, "Informations", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-	      getContentPane().add(panel_1, BorderLayout.CENTER);
 	      panel_1.setLayout(null);
+	      getContentPane().add(panel_1, BorderLayout.CENTER);
 	      
+	      
+	      
+	      // == Création des éléments du bloc == //
 	      JLabel lblNewLabel_1 = new JLabel("Nom :");
 	      lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
 	      lblNewLabel_1.setBounds(163, 42, 45, 13);
 	      panel_1.add(lblNewLabel_1);
+	      
 	      
 	      JLabel lblNewLabel_2 = new JLabel("Prenom :");
 	      lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 10));
 	      lblNewLabel_2.setBounds(163, 85, 59, 13);
 	      panel_1.add(lblNewLabel_2);
 	      
+	      
 	      JLabel lblNewLabel_3 = new JLabel("Role :");
 	      lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 10));
 	      lblNewLabel_3.setBounds(163, 121, 45, 13);
 	      panel_1.add(lblNewLabel_3);
+	      
 	      
 	      JLabel lblNewLabel_4 = new JLabel("Competence :");
 	      lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 10));
 	      lblNewLabel_4.setBounds(163, 157, 73, 13);
 	      panel_1.add(lblNewLabel_4);
 	      
+	      
 	      textField = new JTextField();
 	      textField.setBounds(257, 36, 96, 26);
-	      panel_1.add(textField);
 	      textField.setColumns(10);
+	      panel_1.add(textField);
 	      
 	      textField_1 = new JTextField();
 	      textField_1.setBounds(257, 79, 96, 26);
-	      panel_1.add(textField_1);
 	      textField_1.setColumns(10);
+	      panel_1.add(textField_1);
 	      
 	      textField_2 = new JTextField();
 	      textField_2.setBounds(257, 115, 96, 26);
-	      panel_1.add(textField_2);
 	      textField_2.setColumns(10);
+	      panel_1.add(textField_2);
 	      
 	      textField_3 = new JTextField();
 	      textField_3.setBounds(257, 151, 96, 26);
-	      panel_1.add(textField_3);
 	      textField_3.setColumns(10);
+	      panel_1.add(textField_3);
 	      
 	      
 	      
-	      
+	      // == Configuration des boutons == //
 	      JButton btnNewButton = new JButton("Confirmer");
 	      btnNewButton.addActionListener(new ActionListener() {
+	    	  
 	      	public void actionPerformed(ActionEvent e) {
 	      		btajoutActionPerformed(e);
 	      	}
+	      	
 	      });
+	      
 	      btnNewButton.setBounds(163, 194, 85, 21);
 	      panel_1.add(btnNewButton);
 	      
+	      
+	      
 	      JButton btnNewButton_1 = new JButton("Quitter");
 	      btnNewButton_1.addActionListener(new ActionListener() {
+	    	  
 	      	public void actionPerformed(ActionEvent e) {
                btquitterActionPerformed(e);
 	      	}
+	      	
 	      });
+	      
 	      btnNewButton_1.setBounds(268, 194, 85, 21);
 	      panel_1.add(btnNewButton_1);
+	      
+	      
 	      
 	      jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 	      jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Formulaire Nouveau formateur"));
@@ -121,16 +137,22 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
 	      jPanel2.setLayout(jPanel2Layout);
 	  }
 
+	 
+	 
 	 private void btajoutActionPerformed(java.awt.event.ActionEvent evt) {
-	     String nom =textField.getText();
-         String prenom =textField_1.getText();
-         String role =textField_2.getText();
-         String comp =textField_3.getText();
+		 /**
+		  * Créer et ajoute un membre du personnel à la base de données
+		  */
+		 
+	     String nom 	= textField.getText();
+         String prenom 	= textField_1.getText();
+         String role 	= textField_2.getText();
+         String comp 	= textField_3.getText();
 
 
          this.session.beginTransaction();
-         personnelService ps = new personnelService();
-         personnel p1 = new personnel(nom,prenom,role,comp);
+         personnelService ps 	= new personnelService();
+         personnel p1 			= new personnel(nom,prenom,role,comp);
         
          ps.create(p1, this.session);
 
@@ -138,16 +160,20 @@ public class Fenetreformateur extends javax.swing.JInternalFrame {
          this.dispose();
     }
 
+	 
+	 
     private void btquitterActionPerformed(java.awt.event.ActionEvent evt){
-      session.getTransaction().commit();
-      this.dispose();
-    }
-	 private javax.swing.JPanel jPanel2;
-	 private JTextField textField;
-	 private JTextField textField_1;
-	 private JTextField textField_2;
-	 private JTextField textField_3;
-    private JPanel panel_1  = new JPanel();
-    Session session = HibernateUtil.getSessionFactory().openSession();
+    	session.getTransaction().commit();
+    	this.dispose();
+	}
+    
+    
+	private javax.swing.JPanel jPanel2;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JPanel panel_1 	= new JPanel();
+	Session session 		= HibernateUtil.getSessionFactory().openSession();
 }
 
