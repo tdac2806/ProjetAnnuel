@@ -9,6 +9,13 @@ import org.hibernate.Session;
 import javax.swing.JMenu;
 
 
+import com.mindfusion.scheduling.Calendar;
+import com.mindfusion.scheduling.CalendarAdapter;
+import com.mindfusion.scheduling.ThemeType;
+import com.mindfusion.scheduling.model.Appointment;
+import com.mindfusion.scheduling.model.ItemEvent;
+
+
 public class App extends javax.swing.JFrame {
 
    public App() {
@@ -112,6 +119,8 @@ public class App extends javax.swing.JFrame {
 	      desktopPane.add(flf);
 	      flf.setVisible(true);
 	   }
+   
+   
 
    public static void main(String args[]) {
 
